@@ -1,8 +1,10 @@
 package com.maas._d_model_service.file_access.model;
 
+import com.maas._d_model_service.pricing.model.ModelPrice;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "stl_files")
@@ -14,7 +16,6 @@ public class File {
 
     private String filename;
 
-    @Column(name = "blob_path")
     private String blobPath;
 
     private LocalDateTime uploadedAt;
@@ -22,6 +23,17 @@ public class File {
     private Long customerId;
 
     private String type;
+
+    @OneToMany(mappedBy = "file", cascade = CascadeType.ALL)
+    private List<ModelPrice> modelPrices;
+
+    public List<ModelPrice> getModelPrices() {
+        return modelPrices;
+    }
+
+    public void setModelPrices(List<ModelPrice> modelPrices) {
+        this.modelPrices = modelPrices;
+    }
 
     public String getType() {
         return type;

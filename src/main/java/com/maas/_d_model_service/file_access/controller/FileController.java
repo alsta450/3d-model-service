@@ -1,5 +1,6 @@
 package com.maas._d_model_service.file_access.controller;
 
+import com.maas._d_model_service.file_access.model.File;
 import com.maas._d_model_service.file_access.service.FileService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 public class FileController {
@@ -17,6 +19,16 @@ public class FileController {
 
     public FileController(FileService fileService) {
         this.fileService = fileService;
+    }
+
+    @GetMapping("/customers/{customerId}/models")
+    public ResponseEntity<List<File>> getFile(@PathVariable String customerId) throws IOException {
+
+        List<File> files = fileService.loadFilesByCustomerId(Long.valueOf(customerId));
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType("application/json"))
+                .body(files);
     }
 
     @GetMapping("/models/{fileId}")
