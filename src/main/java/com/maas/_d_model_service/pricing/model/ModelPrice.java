@@ -24,6 +24,10 @@ public class ModelPrice {
 
     private BigDecimal energyCost;
 
+    private BigDecimal operatorMargin;
+
+    private BigDecimal producerMargin;
+
     private BigDecimal totalCost;
 
     @ManyToOne
@@ -91,5 +95,21 @@ public class ModelPrice {
 
     public void setMaterial(String material) {
         this.material = material;
+    }
+
+    public BigDecimal getOperatorMargin() {
+        return operatorMargin;
+    }
+
+    public void setOperatorMargin(BigDecimal operatorMargin) {
+        this.operatorMargin = operatorMargin;
+    }
+
+    public BigDecimal getProducerMargin() {
+        return producerMargin;
+    }
+
+    public void setProducerMargin(BigDecimal producerMargin) {
+        this.producerMargin = producerMargin;
     }
 }
